@@ -1,4 +1,6 @@
-import { ShoppingCart, Package, History, User } from 'lucide-react'
+import { ShoppingCart, Package, History, User, LogOut } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Separator } from '@/components/ui/separator'
 
 type View = 'pos' | 'inventory' | 'history'
 
@@ -15,48 +17,61 @@ export function Sidebar({ currentView, onChangeView }: SidebarProps): JSX.Elemen
   ]
 
   return (
-    <aside className="h-screen w-64 bg-slate-900 flex flex-col border-r border-slate-800 text-slate-300">
-      {/* Header / Logo */}
-      <div className="h-16 flex items-center justify-center border-b border-slate-800">
-        <h1 className="text-xl font-bold text-white tracking-wider flex items-center gap-2">
+    // Fondo oscuro fijo (Slate 900)
+    <aside className="h-screen w-64 bg-slate-900 text-slate-300 flex flex-col border-r border-slate-800">
+      <div className="h-16 flex items-center px-6">
+        <h1 className="text-xl font-bold tracking-tight text-white flex items-center gap-2">
           VET MANAGER
         </h1>
       </div>
 
-      {/* Navegación */}
+      {/* Separador personalizado para modo oscuro */}
+      <Separator className="bg-slate-800" />
+
       <nav className="flex-1 py-6 px-3 space-y-1">
         {menuItems.map((item) => {
           const Icon = item.icon
           const isActive = currentView === item.id
 
           return (
-            <button
+            <Button
               key={item.id}
-              onClick={() => onChangeView(item.id as View)}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors duration-200 cursor-pointer ${
+              // Si está activo, usamos variante 'default' (Azul). Si no, 'ghost' pero con hover oscuro manual.
+              variant={isActive ? 'default' : 'ghost'}
+              className={`w-full justify-start gap-3 text-base font-normal ${
                 isActive
-                  ? 'bg-blue-600 text-white shadow-md'
-                  : 'hover:bg-slate-800 hover:text-white'
+                  ? 'bg-blue-600 hover:bg-blue-700 text-white shadow-md'
+                  : 'text-slate-400 hover:bg-slate-800 hover:text-white'
               }`}
+              onClick={() => onChangeView(item.id as View)}
             >
               <Icon size={20} />
-              <span className="font-medium">{item.label}</span>
-            </button>
+              {item.label}
+            </Button>
           )
         })}
       </nav>
 
-      {/* Perfil Usuario Footer */}
-      <div className="p-4 border-t border-slate-800 bg-slate-950/30">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center text-white">
-            <User size={20} />
+      <Separator className="bg-slate-800" />
+
+      <div className="p-4">
+        <div className="flex items-center gap-3 mb-4 px-2">
+          <div className="h-9 w-9 rounded-full bg-slate-800 flex items-center justify-center text-blue-400 border border-slate-700">
+            <User size={18} />
           </div>
           <div className="flex flex-col">
-            <span className="text-sm text-white font-medium">Veterinario</span>
+            <span className="text-sm font-medium text-white">Veterinario</span>
             <span className="text-xs text-slate-500">Administrador</span>
           </div>
         </div>
+
+        <Button
+          variant="ghost"
+          className="w-full justify-start gap-2 text-slate-400 hover:bg-red-900/20 hover:text-red-400"
+        >
+          <LogOut size={18} />
+          Cerrar Sesión
+        </Button>
       </div>
     </aside>
   )
