@@ -2,15 +2,15 @@ import { useState } from 'react'
 import Layout from './components/Layout'
 import Inventory from './pages/Inventory'
 import Pos from './pages/Pos'
+import Categories from './pages/Categories'
 
 // Placeholder components
-const Categories = () => <div className="text-slate-500">Gestión de Categorías</div>
-const Reports = () => <div className="text-slate-500">Reportes y Estadísticas</div>
-const Settings = () => <div className="text-slate-500">Configuración del Sistema</div>
+const Reports = () => <div className="text-slate-500 p-6">Reportes y Estadísticas</div>
+const Settings = () => <div className="text-slate-500 p-6">Configuración del Sistema</div>
 
 function App(): JSX.Element {
   const [navState, setNavState] = useState<{ view: string; data?: any }>({
-    view: 'pos' // Iniciamos en el POS que es lo principal
+    view: 'categories' // Cambiado temporalmente para visualizar lo nuevo
   })
 
   const handleNavigate = (view: string, data?: any) => {
