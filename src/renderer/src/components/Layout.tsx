@@ -100,22 +100,8 @@ export default function Layout({ children, currentView, onNavigate }: LayoutProp
         </div>
       </aside>
 
-      <main className="flex-1 overflow-auto relative flex flex-col">
-        <header className="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-8 sticky top-0 z-10">
-          <h2 className="text-xl font-bold text-slate-800 capitalize">
-            {currentView === 'settings'
-              ? 'Configuración'
-              : mainMenuItems.find((i) => i.id === currentView)?.label}
-          </h2>
-          <div className="text-sm text-slate-500 font-medium bg-slate-100 px-3 py-1 rounded-full">
-            {new Date().toLocaleDateString('es-AR', {
-              weekday: 'long',
-              day: 'numeric',
-              month: 'long'
-            })}
-          </div>
-        </header>
-
+      <main className="flex-1 overflow-auto relative flex flex-col bg-background">
+        {/* Header eliminado */}
         <div className="p-6 flex-1">{children}</div>
       </main>
     </div>
