@@ -101,8 +101,7 @@ export default function Layout({ children, currentView, onNavigate }: LayoutProp
       </aside>
 
       <main className="flex-1 overflow-auto relative flex flex-col bg-background">
-        {/* Header eliminado */}
-        <div className="p-6 flex-1">{children}</div>
+        <div className="flex-1">{children}</div>
       </main>
     </div>
   )
